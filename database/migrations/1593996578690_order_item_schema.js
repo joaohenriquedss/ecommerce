@@ -27,6 +27,7 @@ class OrderItemSchema extends Schema {
 
     })
 
+
   }
 
   down () {

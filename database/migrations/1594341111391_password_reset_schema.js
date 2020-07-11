@@ -6,16 +6,19 @@ const Schema = use('Schema')
 class PasswordResetSchema extends Schema {
   up () {
     this.create('password_resets', (table) => {
-      table.increments().
-      table.string('email', 254).notNullable()
-      table.string('token').notNullable().unique()
+      table.increments()
+      table.string('email').notNullable()
+      table
+      .string('token')
+      .notNullable()
+      .unique()
 
       table.dateTime('expires_at')
       table.timestamps()
 
       table
       .foreign('email')
-      .refences('email')
+      .references('email')
       .inTable('users')
       .onDelete('cascade')
 

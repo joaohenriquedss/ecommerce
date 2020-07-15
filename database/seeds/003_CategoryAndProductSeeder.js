@@ -15,13 +15,14 @@ const Factory = use('Factory')
 
 class CategoryAndProductSeeder {
   async run () {
-    const categorias = await Factory.model('App/Models/Category').createMany(10)
+    const categories = await Factory.model('App/Models/Category').createMany(10)
 
     await Promise.all(
-      categorias.map(async category => {
-        const produts = await Factory.model('App/Models/Product').createMany(5)
-        await Promise.all(produts.map(async produt => {
-          await produt.categorias().attach([category.id])
+      categories.map(async category => {
+        const products = await Factory.model('App/Models/Product').createMany(5)
+        await Promise.all(
+          products.map(async product => {
+          await product.categories().attach([category.id])
         }))
       })
 

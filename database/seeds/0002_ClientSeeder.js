@@ -25,7 +25,7 @@ class ClientSeeder {
       name : 'Joao',
       surname: 'Santos',
       email: 'joao@gmail.com',
-      passord: 'secret',
+      password: 'secret',
     })
 
     const adminRole = await Role.findBy('slug','admin')

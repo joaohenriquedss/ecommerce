@@ -10,7 +10,7 @@
 |
 */
 
-const Role = user('Role') // Model
+const Role = use('Role') // Model
 /**
  * Criar entidades
  */

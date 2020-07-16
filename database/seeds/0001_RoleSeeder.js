@@ -15,7 +15,7 @@ const Role = use('Role') // Model
  * Criar entidades
  */
 class RoleSeeder {
-  async run () {
+  async run() {
     await Role.create({
       // Criando o Admin
       name: 'Admin',

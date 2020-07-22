@@ -20,6 +20,6 @@ require('./auth')
  require('./admin')
 
  /**
-  * IMportar rotas de Clientes
+  * Importar rotas de Clientes
   */
  require('./client')

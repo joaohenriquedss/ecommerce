@@ -33,8 +33,18 @@ class AuthController {
 
     return response.send({data})
   }
-  async refresh({ request, response, auth }) {
+  async refresh({ request, response, auth }) { // gerar novo token valido
+    var refresh_token = request.input('refresh_token')
 
+    if(!refresh_token) {
+      refresh_token = request.header('refresh_token')
+    }
+
+    const user = await auth
+    .newRefreshToken()
+    .generateForRefreshToken(refresh_token) // gerando novo token e também um novo token para
+
+    return response.send({data: user})
   }
   async logout({ resquet, response, auth }) {
 

@@ -47,7 +47,15 @@ class AuthController {
     return response.send({data: user})
   }
   async logout({ resquet, response, auth }) {
+    var refresh_token = request.input('refresh_token')
 
+    if(!refresh_token) {
+      refresh_token = request.header('refresh_token')
+    }
+
+    await auth.authetucatir('jwt').revokeTokens(['refresh_token'],true)
+
+    return response.status(204).send({})
   }
   /**
    *

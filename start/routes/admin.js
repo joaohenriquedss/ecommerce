@@ -8,7 +8,7 @@ Route.group(() => {
   /**
    * Categorias
    */
-  Route.resource('categories', 'CategoryController').apiOnly()
+  Route.resource('categories', 'Admin/CategoryController').apiOnly()
   /**
    * Produtos
    */

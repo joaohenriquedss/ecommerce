@@ -1,12 +1,12 @@
  'use strict'
 
 
-/** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
+/** @type {typeof import('../../a/@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 
 Route.get('/', () => {
   return { greeting: 'Hello world in JSON' }
-}).as('home')
+})
 
 /**
  * Importa rotas de autenticacao

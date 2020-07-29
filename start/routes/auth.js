@@ -1,6 +1,6 @@
 'use strict'
 
-/** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
+/** @type {typeof import('../../a/@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 
 /**
@@ -12,17 +12,15 @@ const Route = use('Route')
   */
 
   Route.group(() => {
-    Route.post('register', 'AuthController.register').as('auth.register')
-    Route.post('login', 'AuthController.login').as('auth.login')
-    Route.post('refresh','AuthController.refresh').as('auth.refresh')
-    Route.post('logout','AuthController.logout').as('auth.logout')
+    Route.post('register', 'Auth/AuthController.register').as('auth.register')
+    Route.post('login', 'Auth/AuthController.login').as('auth.login')
+    Route.post('refresh','Auth/AuthController.refresh').as('auth.refresh')
+    Route.post('logout','Auth/AuthController.logout').as('auth.logout')
 
     // resetar senha rotas
 
-    Route.post('reset-password', 'AuthController.forgot').as('auth.forgot')
-    Route.get('reset-password', 'AuthController.remember').as('auth.remember')
-    Route.put('reset-passorwd','AuthController.reset').as('auth.reset')
+    Route.post('reset-password', 'Auth/AuthController.forgot').as('auth.forgot')
+    Route.get('reset-password', 'Auth/AuthController.remember').as('auth.remember')
+    Route.put('reset-passorwd','Auth/AuthController.reset').as('auth.reset')
 
-  })
-  .prefix('v1/auth')
-  .namespace('Auth')
+  }).prefix('v1/auth')

@@ -1,6 +1,6 @@
 'use strict'
 
-/** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
+/** @type {typeof import('../../a/@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 
 
@@ -30,4 +30,4 @@ Route.group(() => {
    */
   Route.resource('users', 'UserController').apiOnly()
 
-}).prefix('v1/admin').namespace('Admin')
+}).prefix('v1/admin')

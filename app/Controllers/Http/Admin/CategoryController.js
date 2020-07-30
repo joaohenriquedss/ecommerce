@@ -19,12 +19,14 @@ class CategoryController {
    * @param {View} ctx.view
    * @param {Object}
    */
+
   async index ({ request, response, view , pagination}) {
     const title = request.input('title')
     const query = Category.query()
     if(title) {
-      query.where('title', 'LIKE', `${title}`)
+      query.where('title', 'LIKE', `%${title}%`)
     }
+
     const categories = await query.paginate(pagination.page,pagination.limit)
     return response.send(categories)
 

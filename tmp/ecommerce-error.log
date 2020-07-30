@@ -136,3 +136,4 @@
 {"stack":500,"message":"Cannot read property 'request' of undefined Cannot read property 'request' of undefined","name":"TypeError","level":"error"}
 {"level":"info","message":"serving app on http://%s:%s"}
 {"level":"info","message":"serving app on http://%s:%s"}
+{"level":"info","message":"serving app on http://%s:%s"}

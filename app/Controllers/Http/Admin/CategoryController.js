@@ -64,8 +64,9 @@ class CategoryController {
    * @param {View} ctx.view
    */
   async show ({ params, request, response, view }) {
+    const category = await Category.findOrFail(params.id)
+    return response.send(category)
   }
-
   /**
    * Update category details.
    * PUT or PATCH categories/:id
@@ -74,7 +75,12 @@ class CategoryController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async update ({ params, request, response }) {
+  async update ({ params : {id}, request, response }) {
+    const category = await Category.findOrFail(id)
+    const { title , description , image_id} = request.all()
+    category.merge({title,description,image_id})
+    await category.save()
+    return response.send(category)
   }
 
   /**
@@ -85,7 +91,10 @@ class CategoryController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async destroy ({ params, request, response }) {
+  async destroy ({ params : {id}, request, response }) {
+    const category = await Category.findOrFail(id)
+    await category.delete()
+    return response.status(204).send()
   }
 }
 

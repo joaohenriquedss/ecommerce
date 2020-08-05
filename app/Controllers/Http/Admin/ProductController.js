@@ -17,14 +17,14 @@ class ProductController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async index ({ request, response, pagiation }) {
+  async index ({ request, response, pagination }) {
 
     const name = request.input('name')
     const query = Product.query()
     if(name) {
       query.where('name', 'LIKE', `%${name}%`)
     }
-    const products = await query.paginate(pagiation.page,pagiation.limit)
+    const products = await query.paginate(pagination.page,pagination.limit)
 
     return response.send(products)
 
@@ -81,7 +81,6 @@ class ProductController {
       return response.status(400).send({message : 'Não foi possivel atualizar este produto'})
     }
   }
-
   /**
    * Delete a product with id.
    * DELETE products/:id

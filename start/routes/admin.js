@@ -12,7 +12,7 @@ Route.group(() => {
   /**
    * Produtos
    */
-  Route.resource('products', 'ProductController').apiOnly()
+  Route.resource('products', 'Admin/ProductController').apiOnly()
   /**
    *Cupom
    */

@@ -170,3 +170,10 @@
 {"level":"info","message":"serving app on http://%s:%s"}
 {"stack":500,"message":"Cannot find module '/home/joao/Documentos/projetos/ecommerce/app/Controllers/Http/UserController'\nRequire stack:\n- /home/joao/Documentos/projetos/ecommerce/node_modules/require-stack/src/index.js\n- /home/joao/Documentos/projetos/ecommerce/node_modules/require-stack/index.js\n- /home/joao/Documentos/projetos/ecommerce/node_modules/@adonisjs/fold/src/Ioc/index.js\n- /home/joao/Documentos/projetos/ecommerce/node_modules/@adonisjs/fold/index.js\n- /home/joao/Documentos/projetos/ecommerce/server.js Cannot find module '/home/joao/Documentos/projetos/ecommerce/app/Controllers/Http/UserController'\nRequire stack:\n- /home/joao/Documentos/projetos/ecommerce/node_modules/require-stack/src/index.js\n- /home/joao/Documentos/projetos/ecommerce/node_modules/require-stack/index.js\n- /home/joao/Documentos/projetos/ecommerce/node_modules/@adonisjs/fold/src/Ioc/index.js\n- /home/joao/Documentos/projetos/ecommerce/node_modules/@adonisjs/fold/index.js\n- /home/joao/Documentos/projetos/ecommerce/server.js","name":"Error","level":"error"}
 {"level":"info","message":"serving app on http://%s:%s"}
+{"level":"info","message":"serving app on http://%s:%s"}
+{"level":"info","message":"serving app on http://%s:%s"}
+{"level":"info","message":"serving app on http://%s:%s"}
+{"level":"info","message":"serving app on http://%s:%s"}
+{"level":"info","message":"serving app on http://%s:%s"}
+{"level":"info","message":"serving app on http://%s:%s"}
+{"level":"info","message":"serving app on http://%s:%s"}

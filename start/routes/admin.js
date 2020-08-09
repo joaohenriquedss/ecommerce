@@ -16,18 +16,18 @@ Route.group(() => {
   /**
    *Cupom
    */
-  Route.resource('coupons', 'CouponController').apiOnly()
+  Route.resource('coupons', 'Admin/CouponController').apiOnly()
   /**
    * Order
    */
-  Route.resource('orders', 'OrderController').apiOnly()
+  Route.resource('orders', 'Admin/OrderController').apiOnly()
   /**
    * Imagem
    */
-  Route.resource('images', 'ImageController').apiOnly()
+  Route.resource('images', 'Admin/ImageController').apiOnly()
   /**
    * Usuario
    */
-  Route.resource('users', 'UserController').apiOnly()
+  Route.resource('users', 'Admin/UserController').apiOnly()
 
 }).prefix('v1/admin')

@@ -68,5 +68,7 @@ const Helpers = use('Helpers')
   return {successes, errors}
  }
  module.exports = {
-   str_random
+   str_random,
+   manage_single_upload,
+   manage_multiplos_uploads
  }

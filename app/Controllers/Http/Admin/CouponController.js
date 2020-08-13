@@ -4,6 +4,9 @@
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
 
+const Coupon = use('App/Models/Coupon')
+const Database = use('Database')
+
 /**
  * Resourceful controller for interacting with coupons
  */
@@ -15,21 +18,20 @@ class CouponController {
    * @param {object} ctx
    * @param {Request} ctx.request
    * @param {Response} ctx.response
-   * @param {View} ctx.view
+   * @param {object} ctx.pagination
    */
-  async index ({ request, response, view }) {
-  }
+  async index ({ request, response, pagination }) {
 
-  /**
-   * Render a form to be used for creating a new coupon.
-   * GET coupons/create
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
-  async create ({ request, response, view }) {
+    const code = request.input('code');
+    const query = Coupon.query()
+    if(code){
+      query.where('code','LIKE', `%${code}%`)
+    }
+
+    const coupons = await query.paginate(pagination.page,pagination.limit);
+
+    return response.send(coupons)
+
   }
 
   /**
@@ -41,6 +43,33 @@ class CouponController {
    * @param {Response} ctx.response
    */
   async store ({ request, response }) {
+    const trx = await Database.beginTransaction()
+    /**
+     * 1 - produto - pode ser utilizado apenas em produtos específicos
+     * 2 - cliente - pode ser utilizado para apenas um cliente
+     * 3 - regra 1 e 2
+     * 4 -
+     */
+    var can_use_for = {
+      client: false,
+      product: false
+    }
+    try {
+      const couponData = request.only([
+        'code',
+        'discount',
+        'valid_from',
+        'valid_until',
+        'quantity',
+        'type',
+        'recursive'
+      ])
+
+      const {users, products} = request.only(['users', 'products'])
+      const  coupon = await Coupon.create(couponData,trx)
+    } catch (error) {
+
+    }
   }
 
   /**
@@ -52,19 +81,9 @@ class CouponController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async show ({ params, request, response, view }) {
-  }
-
-  /**
-   * Render a form to update an existing coupon.
-   * GET coupons/:id/edit
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
-  async edit ({ params, request, response, view }) {
+  async show ({ params : {id}, request, response, view }) {
+    const coupon = await Coupon.findOrFail(id)
+    return response.send(coupon)
   }
 
   /**
@@ -86,7 +105,21 @@ class CouponController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async destroy ({ params, request, response }) {
+  async destroy ({ params: {id}, request, response }) {
+    const trx = await Database.beginTransaction()
+    const coupon = await Coupon.findOrFail(id)
+    try {
+      await coupon.products().detach([], trx)
+      await coupon.orders().detach([], trx)
+      await coupon.users().detach([], trx)
+      await trx.commit() // manda bala
+      return response.status(204).send()
+    } catch (error) {
+      await trx.rollback()
+      return response.status(400).send({
+        message: 'nao foi possivel deletar este cupom no momento'
+      })
+    }
   }
 }
 

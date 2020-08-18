@@ -6,6 +6,7 @@
 
 const Coupon = use('App/Models/Coupon')
 const Database = use('Database')
+const Service = use('App/Services/Coupon/CouponService')
 
 /**
  * Resourceful controller for interacting with coupons
@@ -67,6 +68,7 @@ class CouponController {
 
       const {users, products} = request.only(['users', 'products'])
       const  coupon = await Coupon.create(couponData,trx)
+      const service = new Service(coupon, trx)
     } catch (error) {
 
     }

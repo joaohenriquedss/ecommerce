@@ -1,8 +1,9 @@
 'use strict'
 const Coupon = use('App/Models/Coupon')
 const Order = use('App/Models/Order')
+const Database = use('Database')
 
-const DiscountHook = exports = module.exports = {}
+const DiscountHook = (exports = module.exports = {})
 
 DiscountHook.method = async model => {
   var couponProducts, discountItems = []
@@ -46,4 +47,24 @@ DiscountHook.method = async model => {
       break
   }
   return model
+}
+
+// decrementando a quantidade de cupons
+
+DiscountHook.decrementCoupons = async model => {
+  const query = Database.from('coupons')
+  if(model.$transaction) {
+    query.transacting(model.$transaction)
+  }
+  await query.where('id', model.coupon_id).decrement('quantity', 1)
+
+}
+
+// incrementa a quantidade de cupom
+DiscountHook.incrementCoupons = async model => {
+  const query = Database.from('coupons')
+  if(model.$transaction){
+    query.transacting(model.$transaction)
+  }
+  await query.where('id', model.coupon_id).increment('quantity', 1)
 }

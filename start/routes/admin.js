@@ -33,4 +33,4 @@ Route.group(() => {
    */
   Route.resource('users', 'Admin/UserController').apiOnly()
 
-}).prefix('v1/admin')
+}).prefix('v1/admin').middleware(['auth','is:( admin || manager )'])

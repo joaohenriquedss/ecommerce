@@ -20,6 +20,9 @@ Route.group(() => {
   /**
    * Order
    */
+  Route.post('orders/:id/discount', 'Admin/OrderController.applyDiscount')
+  Route.delete('orders/:id/discount','Admin/OrderController.removeDiscount')
+
   Route.resource('orders', 'Admin/OrderController').apiOnly()
   /**
    * Imagem

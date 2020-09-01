@@ -34,6 +34,10 @@ class OrderService {
 
   }
   async canApplyDiscount(coupon) {
+    const now = new Date().getTime()
+    if (now > coupon.valid_from.getTime() || (typeof coupon.valid_until == 'object' && coupon.valid_until.getTime() < now)) {
+      return false
+    }
     const couponProducts = await Database
       .from('coupon_products')
       .where('coupon_id', coupon.id)
@@ -77,18 +81,18 @@ class OrderService {
         return true
       }
     }
-/**
- * caso 2 - coupon associado apenas a produto
- */
-    if(isAssociatedProducts && Array.isArray(productsMatch) && productsMatch.length > 0){
+    /**
+     * caso 2 - coupon associado apenas a produto
+     */
+    if (isAssociatedProducts && Array.isArray(productsMatch) && productsMatch.length > 0) {
       return true
     }
     /**
      * 3 - o cupom está associado a 1 ou mais clientes
      */
-    if(isAssociatedClients && Array.isArray(couponClients) && couponClients.length > 0){
+    if (isAssociatedClients && Array.isArray(couponClients) && couponClients.length > 0) {
       const match = couponClients.find(client => client == this.model.user_id)
-      if(match){
+      if (match) {
         return true
       }
     }
